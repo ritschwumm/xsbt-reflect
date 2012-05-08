@@ -9,7 +9,7 @@ Build and publish the plugin:
     sbt publish-local
     
 Add the plugin to your project in project/plugins/build.sbt:
-	addSbtPlugin("de.djini" % "xsbt-reflect" % "0.0.2")
+	addSbtPlugin("de.djini" % "xsbt-reflect" % "0.0.3")
     
 Include the plugin in you project's build.sbt:
 
