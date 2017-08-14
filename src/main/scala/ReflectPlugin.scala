@@ -1,22 +1,26 @@
+package xsbtReflect
+
 import sbt._
 
-/**
-usage
-	<code>
-	reflectSettings
-	
-	sourceGenerators in Compile <+= reflect map identity
-	</code>
-code
-	println("project version=" + Reflect.version)
-*/
-object ReflectPlugin extends Plugin {
+object Import {
 	val reflect			= taskKey[Seq[File]]("generated source files")
 	val reflectPackage	= settingKey[String]("package name")
 	val reflectClass	= settingKey[String]("class name")
+}
+
+/**
+sourceGenerators in Compile <+= reflect map identity
+*/
+object ReflectPlugin extends AutoPlugin {
+	override def requires:Plugins		= empty
 	
-	lazy val reflectSettings:Seq[Def.Setting[_]]	=
-			Seq(
+	override def trigger:PluginTrigger	= allRequirements
+	
+	lazy val autoImport	= Import
+	import autoImport._
+	
+	override def projectSettings:Seq[Def.Setting[_]]	=
+			Vector(
 				reflectPackage	:= "",
 				reflectClass	:= "Reflect",
 				reflect			<<= (Keys.sourceManaged, Keys.name, Keys.version, reflectPackage, reflectClass) map {

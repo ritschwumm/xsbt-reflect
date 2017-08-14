@@ -4,7 +4,7 @@ name			:= "xsbt-reflect"
 
 organization	:= "de.djini"
 
-version			:= "1.0.0"
+version			:= "1.1.0"
 
 scalacOptions	++= Seq(
 	"-deprecation",
