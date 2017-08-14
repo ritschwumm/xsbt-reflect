@@ -12,12 +12,12 @@ object Import {
 sourceGenerators in Compile <+= reflect map identity
 */
 object ReflectPlugin extends AutoPlugin {
-	override def requires:Plugins		= empty
-	
-	override def trigger:PluginTrigger	= allRequirements
-	
 	lazy val autoImport	= Import
 	import autoImport._
+	
+	override def requires:Plugins		= plugins.JvmPlugin
+	
+	override def trigger:PluginTrigger	= noTrigger
 	
 	override def projectSettings:Seq[Def.Setting[_]]	=
 			Vector(
