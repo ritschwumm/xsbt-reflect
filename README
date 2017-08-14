@@ -1,13 +1,13 @@
-!!! this project is obsolete !!!
-
-An sbt plugin to reflect build properties into source code
+An sbt plugin to reflect build properties into source code.
+This plugin is mostly for demonstration purposes,
+for real-world usage you probably want sbt-buildinfo.
 
 To build this code, get and install SBT from
     https://github.com/sbt/sbt
 
 Build and publish the plugin:
     git clone git@github.com:ritschwumm/xstb-reflect.git
-    cd xstb-reflect
+    cd xsbt-reflect
     sbt publish-local
 
 Add the plugin to your project in project/plugins.sbt:
@@ -15,11 +15,11 @@ Add the plugin to your project in project/plugins.sbt:
 
 Include the plugin in your project's build.sbt:
 
-    reflectPackage  := "my.pack"
-
-    reflectClass    := "Reflected"
-
-    sourceGenerators in Compile <+= reflect map identity
+	enablePlugins(ReflectPlugin)
+	
+Optionally set package- and class name:
+    reflectPackage  := "my.package"
+    reflectClass    := "ReflectBuild"
 
 With this setup, you can access the name and version of your project
 from scala as my.pack.Reflected.name and my.pack.Reflected.version .

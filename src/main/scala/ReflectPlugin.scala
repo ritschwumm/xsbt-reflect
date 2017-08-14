@@ -3,40 +3,42 @@ package xsbtReflect
 import sbt._
 
 object Import {
-	val reflect			= taskKey[Seq[File]]("generated source files")
+	val reflect			= taskKey[Seq[File]]("generated source file")
 	val reflectPackage	= settingKey[String]("package name")
 	val reflectClass	= settingKey[String]("class name")
 }
 
-/**
-sourceGenerators in Compile <+= reflect map identity
-*/
 object ReflectPlugin extends AutoPlugin {
 	lazy val autoImport	= Import
 	import autoImport._
 	
 	override def requires:Plugins		= plugins.JvmPlugin
-	
 	override def trigger:PluginTrigger	= noTrigger
 	
 	override def projectSettings:Seq[Def.Setting[_]]	=
 			Vector(
 				reflectPackage	:= "",
 				reflectClass	:= "Reflect",
-				reflect			<<= (Keys.sourceManaged, Keys.name, Keys.version, reflectPackage, reflectClass) map {
-					(sourceManaged:File, name:String, version:String, reflectPackage:String, reflectClass:String)	=>
-						val	file	= sourceManaged / "reflect" / "Reflect.scala"
-						val code	=
-								(
-									if (reflectPackage.nonEmpty)	"package " + reflectPackage + "\n"
-									else							""
-								) +
-								"object " + reflectClass + " {\n" +
-								"\tval name\t= \"" + name + "\"\n" +
-								"\tval version\t= \"" + version + "\"\n" +
-								"}\n"
-						IO write (file, code)
-						Seq(file)
-				}
+				reflect			:= {
+					val name		= Keys.name.value
+					val version		= Keys.version.value
+					val packageName	= reflectPackage.value
+					val className	= reflectClass.value
+					val dir			= Keys.sourceManaged.value / "reflect"
+					val	file		= dir / s"${className}.scala"
+					val code		=
+							(
+								if (packageName.nonEmpty)	"package " + packageName + "\n"
+								else						""
+							) +
+							"object " + className + " {\n" +
+							"\tval name\t= \"" + name + "\"\n" +
+							"\tval version\t= \"" + version + "\"\n" +
+							"}\n"
+					IO delete dir
+					IO write (file, code)
+					Seq(file)
+				},
+				Keys.sourceGenerators in Compile += Def.task { reflect.value }
 			)
 }
