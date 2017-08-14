@@ -4,14 +4,17 @@ name			:= "xsbt-reflect"
 
 organization	:= "de.djini"
 
-version			:= "0.0.3"
+version			:= "1.0.0"
 
-scalaVersion	:= "2.9.1"
-
-//publishArtifact in (Compile, packageBin)	:= false
-
-publishArtifact in (Compile, packageDoc)	:= false
-
-publishArtifact in (Compile, packageSrc)	:= false
-
-scalacOptions	++= Seq("-deprecation", "-unchecked")
+scalacOptions	++= Seq(
+	"-deprecation",
+	"-unchecked",
+	// "-language:implicitConversions",
+	// "-language:existentials",
+	// "-language:higherKinds",
+	// "-language:reflectiveCalls",
+	// "-language:dynamics",
+	// "-language:postfixOps",
+	// "-language:experimental.macros"
+	"-feature"
+)
