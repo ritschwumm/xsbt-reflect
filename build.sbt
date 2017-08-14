@@ -1,10 +1,8 @@
 sbtPlugin		:= true
 
 name			:= "xsbt-reflect"
-
 organization	:= "de.djini"
-
-version			:= "1.2.0"
+version			:= "1.3.0"
 
 scalacOptions	++= Seq(
 	"-deprecation",
@@ -16,5 +14,8 @@ scalacOptions	++= Seq(
 	// "-language:dynamics",
 	// "-language:postfixOps",
 	// "-language:experimental.macros"
-	"-feature"
+	"-feature",
+	"-Xfatal-warnings"
 )
+
+conflictManager	:= ConflictManager.strict
