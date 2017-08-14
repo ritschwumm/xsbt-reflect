@@ -15,8 +15,8 @@ Add the plugin to your project in project/plugins.sbt:
 
 Include the plugin in your project's build.sbt:
 
-	enablePlugins(ReflectPlugin)
-	
+    enablePlugins(ReflectPlugin)
+    
 Optionally set package- and class name:
     reflectPackage  := "my.package"
     reflectClass    := "ReflectBuild"
