@@ -3,3 +3,5 @@ project/boot/
 project/plugins/project/
 
 /build/
+
+private.sbt
