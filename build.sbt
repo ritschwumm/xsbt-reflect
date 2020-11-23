@@ -2,20 +2,13 @@ sbtPlugin		:= true
 
 name			:= "xsbt-reflect"
 organization	:= "de.djini"
-version			:= "1.5.0"
+version			:= "1.6.0"
 
 scalacOptions	++= Seq(
+	"-feature",
 	"-deprecation",
 	"-unchecked",
-	// "-language:implicitConversions",
-	// "-language:existentials",
-	// "-language:higherKinds",
-	// "-language:reflectiveCalls",
-	// "-language:dynamics",
-	// "-language:postfixOps",
-	// "-language:experimental.macros"
-	"-feature",
-	"-Xfatal-warnings"
+	"-Xfatal-warnings",
 )
 
-conflictManager	:= ConflictManager.strict
+conflictManager	:= ConflictManager.strict withOrganization "^(?!(org\\.scala-lang|org\\.scala-js|org\\.scala-sbt)(\\..*)?)$"
