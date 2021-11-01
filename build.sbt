@@ -1,8 +1,12 @@
+Global / onChangedBuildSource := ReloadOnSourceChanges
+
+ThisBuild / versionScheme := Some("early-semver")
+
 sbtPlugin		:= true
 
 name			:= "xsbt-reflect"
 organization	:= "de.djini"
-version			:= "1.6.0"
+version			:= "1.7.0"
 
 scalacOptions	++= Seq(
 	"-feature",

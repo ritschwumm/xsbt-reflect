@@ -39,6 +39,6 @@ object ReflectPlugin extends AutoPlugin {
 				IO write (file, code)
 				Seq(file)
 			},
-			Keys.sourceGenerators in Compile += Def.task { reflect.value }
+			Compile / Keys.sourceGenerators += Def.task { reflect.value }
 		)
 }
