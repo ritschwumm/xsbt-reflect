@@ -1,7 +1,15 @@
 target/
 project/boot/
-project/plugins/project/
+/.bsp/
 
-/build/
+metals.sbt
+.metals/
+.bloop/
+
+/.vscode/
+
+/override.sbt
+
+###
 
 private.sbt
